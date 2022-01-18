@@ -1,0 +1,339 @@
+$indent_1: 5px;
+$indent_2: 10px;
+$indent_3: 15px;
+$indent_50: 50px;
+
+.link-unstyled {
+  &,
+  &:visited,
+  &:hover,
+  &:active,
+  &:focus,
+  &:active:hover {
+    text-decoration: none;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+
+.text-disappear {
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.width-250 {
+  width: 250px;
+}
+
+.width-200 {
+  width: 200px;
+}
+
+.height-200 {
+  height: 200px;
+}
+
+.height-220 {
+  height: 220px;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.mw-100 {
+  max-width: 100%;
+}
+
+.mh-100 {
+  max-height: 100%;
+}
+.mh-60 {
+  max-height: 50px;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-inline-flex {
+  display: inline-flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.padded {
+  padding: 10px;
+}
+.padding-60 {
+  padding: 60px;
+}
+
+.cursor-pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.ws-nowrap {
+  white-space: nowrap;
+}
+
+.br-circle {
+  border-radius: 50%;
+}
+
+.font-bolder {
+  font-weight: 500;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.word-break-all {
+  word-break: break-all;
+}
+
+.font-huge {
+  font-size: 100px;
+}
+
+.contain-scroll {
+  overscroll-behavior: contain;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.px-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.mt-page {
+  margin-top: 150px;
+}
+.mt-mid {
+  margin-top: 70px;
+}
+.mt-30 {
+  margin-top: 30px;
+}
+
+.mt-1 {
+  margin-top: $indent_1;
+}
+
+.mt-2 {
+  margin-top: $indent_2;
+}
+
+.mt-3 {
+  margin-top: $indent_3;
+}
+
+.mb-1 {
+  margin-bottom: $indent_1;
+}
+
+.mb-2 {
+  margin-bottom: $indent_2;
+}
+
+.mb-3 {
+  margin-bottom: $indent_3;
+}
+
+.ml-1 {
+  margin-left: $indent_1;
+}
+
+.ml-2 {
+  margin-left: $indent_2;
+}
+
+.ml-3 {
+  margin-left: $indent_3;
+}
+.ml-50 {
+  margin-left: $indent_50;
+}
+.ml-200 {
+  margin-left: 200px;
+}
+
+.mr-1 {
+  margin-right: $indent_1;
+}
+
+.mr-2 {
+  margin-right: $indent_2;
+}
+
+.mr-3 {
+  margin-right: $indent_3;
+}
+.mr-inh {
+  margin-right: inherit;
+}
+
+.pt-1 {
+  padding-top: $indent_1;
+}
+
+.pt-2 {
+  padding-top: $indent_2;
+}
+
+.pt-3 {
+  padding-top: $indent_3;
+}
+
+.pb-1 {
+  padding-bottom: $indent_1;
+}
+
+.pb-2 {
+  padding-bottom: $indent_2;
+}
+
+.pb-3 {
+  padding-bottom: $indent_3;
+}
+.pb-50 {
+  padding-bottom: $indent_50;
+}
+.i-point {
+  cursor: pointer;
+}
+.text-end {
+  text-align: end;
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 700px;
+  // padding: 0 50px;
+}
+.header {
+  width: 100%;
+}
+.h1 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 400;
+  margin-top: 20px;
+  font-family: cursive;
+}
+.span {
+  text-transform: uppercase;
+  color: #545454;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.instagram {
+  border-radius: "50%";
+  color: white;
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+}
+.nav {
+  overflow: hidden;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 8px 25px -10px #000;
+}
+.ptag {
+  font-family: -webkit-pictograph;
+  font-size: 15px;
+}
