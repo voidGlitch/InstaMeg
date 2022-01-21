@@ -1,20 +1,91 @@
 import React from "react";
-
-import { Container, Row, Col, Grid, Panel } from "rsuite";
+import firebase from "firebase/compat/app";
+import { auth } from "../misc/firebase";
+import { Container, Row, Col, Grid, Panel, Button } from "rsuite";
+import { ReactComponent as Valid } from "../component/valid.svg";
+import { ReactComponent as Facebook } from "../component/Facebookicon.svg";
+import { ReactComponent as Google } from "../component/Googleicon.svg";
+import { Link } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
 
 const Signin = () => {
-  //tell React that your component needs to do something after render.
+  const { currentUser } = useAuth();
+  const signInWithProvider = async (provider) => {
+    //Provider is used to Authenticate users by integrating with federated identity providers like google,facebook and method used popup takes a provider object
+    const result = await auth.signInWithPopup(provider);
+
+    console.log(result);
+  };
+
+  // const signInWithMail = async (email, password) => {
+  //   const result1 = await auth.signInWithEmailAndPassword(email, password);
+  //   console.log(result1);
+  // };
+  const facebookSignin = () => {
+    //Represents the Facebook Login authentication provider. Use this class to obtain FacebookAuthCredential s.
+    signInWithProvider(new firebase.auth.FacebookAuthProvider());
+  };
+
+  const googleSignin = () => {
+    //Sets the OAuth custom parameters to pass in a Google OAuth request for popup and redirect sign-in operations
+    signInWithProvider(new firebase.auth.GoogleAuthProvider());
+  };
 
   return (
-    <div>
+    <div style={{ background: "#0f2b1d" }}>
       <Container>
-        <Grid className="mt-page">
+        <Grid className="mt-mid">
           <Row>
             <Col xs={24} md={12} mdOffset={6}>
               {/* panel use gives padding */}
-              <Panel className="text-center mt-mid">
-                <h1>Welcome to the Blog-app</h1>
-                <p>An intractive app filled with your memories</p>
+              <Panel className="text-center mt-3">
+                <div>
+                  <Valid />
+                </div>
+                <p className="mt-3 text-white">
+                  An intractive chat application with features like stickers and
+                  videos
+                </p>
+
+                <div className="mt-3">
+                  <Button
+                    block
+                    color="cyan"
+                    appearance="primary"
+                    onClick={facebookSignin}
+                  >
+                    <Facebook />
+                    {currentUser
+                      ? "Continue with facebook"
+                      : "Login with facebook"}
+                  </Button>
+                  <Button
+                    block
+                    style={{ backgroundColor: "#1ed71e" }}
+                    appearance="primary"
+                    onClick={googleSignin}
+                  >
+                    <Google />{" "}
+                    {currentUser
+                      ? "Continue with facebook"
+                      : "Login with facebook"}
+                  </Button>
+
+                  <Link to="/Register" style={{ textDecoration: "none" }}>
+                    <Button
+                      className="mt-1"
+                      block
+                      color="violet"
+                      appearance="primary"
+                    >
+                      <img
+                        src="https://img.icons8.com/ios-glyphs/30/000000/wolf.png"
+                        alt=""
+                      />{" "}
+                      Register now
+                    </Button>
+                  </Link>
+                </div>
               </Panel>
             </Col>
           </Row>

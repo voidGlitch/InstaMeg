@@ -1,0 +1,47 @@
+{
+  "results": [
+    {
+      "gender": "female",
+      "name": { "title": "Mrs", "first": "Erika", "last": "Lam" },
+      "location": {
+        "street": { "number": 4929, "name": "Sanatoriebakken" },
+        "city": "Innfjorden",
+        "state": "Sogn og Fjordane",
+        "country": "Norway",
+        "postcode": "3276",
+        "coordinates": { "latitude": "56.6590", "longitude": "34.3258" },
+        "timezone": {
+          "offset": "+5:30",
+          "description": "Bombay, Calcutta, Madras, New Delhi"
+        }
+      },
+      "email": "erika.lam@example.com",
+      "login": {
+        "uuid": "476b7b5b-fd41-452a-8370-8b375270ea36",
+        "username": "angrylion749",
+        "password": "hotrats",
+        "salt": "2rfwjNWm",
+        "md5": "8d257c972269b887766a604e8e46f907",
+        "sha1": "13df4fc0c7da43aa5c53d9ac09b79a2d0b38f02a",
+        "sha256": "53a8ecbc3a91445c2ed25d1fc0cc98f05382d01112909f0f637886ada55cdea5"
+      },
+      "dob": { "date": "1957-06-21T17:47:40.644Z", "age": 65 },
+      "registered": { "date": "2010-06-01T14:44:00.001Z", "age": 12 },
+      "phone": "24096131",
+      "cell": "40740274",
+      "id": { "name": "FN", "value": "21065702433" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/31.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/31.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/31.jpg"
+      },
+      "nat": "NO"
+    }
+  ],
+  "info": {
+    "seed": "ea353ddbd85c83ce",
+    "results": 1,
+    "page": 1,
+    "version": "1.3"
+  }
+}

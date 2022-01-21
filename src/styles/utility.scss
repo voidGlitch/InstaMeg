@@ -187,6 +187,9 @@ $indent_50: 50px;
 .mt-mid {
   margin-top: 70px;
 }
+.mt-100 {
+  margin-top: 100px;
+}
 .mt-30 {
   margin-top: 30px;
 }
@@ -336,4 +339,15 @@ $indent_50: 50px;
 .ptag {
   font-family: -webkit-pictograph;
   font-size: 15px;
+}
+.Fade {
+  animation: fadeOut ease 7s;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
