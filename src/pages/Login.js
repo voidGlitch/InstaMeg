@@ -2,39 +2,61 @@ import React, { useState, useRef } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { Link } from "react-router-dom";
 import { Card, Form, Button, Alert } from "react-bootstrap";
+import { Message, toaster } from "rsuite";
 
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuth();
+  const { login, isverified, success } = useAuth();
   const [error, seterror] = useState("");
   const [loading, setloading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isverified) {
+      toaster.push(
+        <Message showIcon type="error">
+          Failed to Login!
+        </Message>,
+        { placement: "topCenter" }
+      );
 
+      return seterror(
+        "Please Sign in again and verify with your email!.It is Seems you are not valid user"
+      );
+    }
     try {
       seterror("");
       setloading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-    } catch {
-      seterror("Failed to login");
+      console.log(success);
       setTimeout(() => {
-        seterror(null);
-      }, 4000);
+        if (!success) {
+          seterror("Invalid! Try Again");
+        }
+      }, 5000);
+      emailRef.current.value = "";
+
+      passwordRef.current.value = "";
+    } catch (err) {
+      seterror(err.message);
     }
     setloading(false);
   };
 
   return (
     <>
-      {error && (
-        <Alert variant="danger" as="alert" className="Fade">
-          {error}
-        </Alert>
-      )}
       <Card>
         <Card.Body>
+          {error && (
+            <Alert variant="danger">
+              <img
+                src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/30/000000/external-error-coronavirus-covid19-flatart-icons-flat-flatarticons.png"
+                alt="not"
+              />
+              {error}
+            </Alert>
+          )}
           <h2 className="text-center mb-4">Login</h2>
 
           <Form onSubmit={handleSubmit}>
@@ -61,7 +83,7 @@ const Login = () => {
 
       <div className="w-100 text-center mt-2">
         Create a new Account?<br></br>
-        Register<Link to="/signin">Here!</Link>
+        Register<Link to="/Register">Here!</Link>
       </div>
     </>
   );

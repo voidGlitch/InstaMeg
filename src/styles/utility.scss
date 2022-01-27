@@ -329,25 +329,3 @@ $indent_50: 50px;
     #bc1888 100%
   );
 }
-.nav {
-  overflow: hidden;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-  box-shadow: 0 8px 25px -10px #000;
-}
-.ptag {
-  font-family: -webkit-pictograph;
-  font-size: 15px;
-}
-.Fade {
-  animation: fadeOut ease 7s;
-}
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.5;
-  }
-}

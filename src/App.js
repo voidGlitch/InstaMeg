@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import "./styles/main.scss";
@@ -9,14 +10,21 @@ import PublicRoute from "./component/PublicRoute";
 import { Container } from "react-bootstrap";
 import Signup from "./pages/Signup";
 import { AuthProvider } from "./Context/AuthContext";
+import Wait from "./pages/Wait";
 
 function App() {
+  useEffect(() => {
+    console.log("changed comp");
+  }, []);
   return (
     <>
       <AuthProvider>
         <Switch>
           <PublicRoute path="/signin" exact>
             <Signin />
+          </PublicRoute>
+          <PublicRoute path="/wait" exact>
+            <Wait />
           </PublicRoute>
           <PublicRoute path="/Register" exact>
             <Container
