@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { auth } from "../misc/firebase";
+import firebase from "firebase/compat/app";
+import { auth, database } from "../misc/firebase";
 import { updateProfile, sendEmailVerification } from "firebase/auth";
 import { Message, Notification, toaster } from "rsuite";
 import { useHistory } from "react-router-dom";
@@ -21,8 +22,15 @@ export const AuthProvider = ({ children }) => {
     //function to create user with email and password
 
     try {
-      const result = await auth.createUserWithEmailAndPassword(email, password);
-
+      setLoading(true);
+      const { additionalUserInfo, user } =
+        await auth.createUserWithEmailAndPassword(email, password);
+      if (additionalUserInfo.isNewUser) {
+        await database.ref(`/profiles/${user.uid}`).set({
+          name: username,
+          createdAt: firebase.database.ServerValue.TIMESTAMP,
+        });
+      }
       await updateProfile(auth.currentUser, {
         displayName: `${username}`,
       });
@@ -30,13 +38,14 @@ export const AuthProvider = ({ children }) => {
         url: "http://localhost:3000/",
         handleCodeInApp: true,
       });
+
       toaster.push(
         <Message showIcon type="info">
           Check your email {email}
         </Message>,
         { placement: "topCenter" }
       );
-      console.log(result);
+
       history.push("/wait");
     } catch (error) {
       toaster.push(
@@ -53,6 +62,7 @@ export const AuthProvider = ({ children }) => {
         history.push("/signin");
       }
     }
+    setLoading(false);
   };
 
   const login = async (email, password) => {
@@ -89,7 +99,7 @@ export const AuthProvider = ({ children }) => {
         setverified(user.emailVerified);
       }
       setcurrentUser(user);
-
+      console.log(user);
       setLoading(false);
     });
 
@@ -103,11 +113,12 @@ export const AuthProvider = ({ children }) => {
     signup,
     login,
     success,
+    Loading,
   };
   return (
     <AuthContext.Provider value={value}>
       {/* we do not run any of the applyication unless and until loading is false */}
-      {!Loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

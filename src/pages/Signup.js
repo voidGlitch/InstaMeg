@@ -9,7 +9,7 @@ const Signup = () => {
   const usernameRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signup } = useAuth();
+  const { signup, Loading } = useAuth();
   const [error, seterror] = useState("");
 
   const handleSubmit = async (e) => {
@@ -99,7 +99,7 @@ const Signup = () => {
                 minLength={6}
               />
             </Form.Group>
-            <Button className="w-100 mt-3" type="submit">
+            <Button disabled={Loading} className="w-100 mt-3" type="submit">
               Sign up
             </Button>
           </Form>

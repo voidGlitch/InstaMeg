@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import "./styles/main.scss";
@@ -13,9 +13,6 @@ import { AuthProvider } from "./Context/AuthContext";
 import Wait from "./pages/Wait";
 
 function App() {
-  useEffect(() => {
-    console.log("changed comp");
-  }, []);
   return (
     <>
       <AuthProvider>
