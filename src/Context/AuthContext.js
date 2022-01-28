@@ -13,6 +13,7 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setcurrentUser] = useState(null);
+  const [authprofile, setauthProfile] = useState(false);
   const [Loading, setLoading] = useState(true);
   const [isverified, setverified] = useState(false);
   const [success, setsuccess] = useState(false);
@@ -92,19 +93,46 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     //firebase has its own way of when the user is set and this method run when the user is set in firebase
     //unsubscribe when its done
+    let userRef;
     const unsubscribe = auth.onAuthStateChanged((user) => {
       //first we set the user and then we set the loading to false
+      setcurrentUser(user);
+      console.log(user);
 
       if (user) {
         setverified(user.emailVerified);
+
+        //get actual data from database of the user
+        //on is a Listens for data changes at a particular location.
+        //This is the primary way to read data from a Database. Your callback will be triggered for the initial data and again whenever the data changes
+
+        userRef = database.ref(`/profiles/${user.uid}`);
+        userRef.on("value", (snap) => {
+          const { name, createdAt } = snap.val();
+
+          const data = {
+            name,
+            createdAt,
+            uid: user.uid,
+            email: user.email,
+          };
+          setauthProfile(data);
+          setLoading(false);
+        });
+      } else {
+        setauthProfile(null);
+        setLoading(false);
       }
-      setcurrentUser(user);
-      console.log(user);
-      setLoading(false);
     });
 
     //work as a clean up funtion and unmount(remove) us from this listner when components change
-    return unsubscribe;
+    return () => {
+      //we are dealing with subs so we need to unsub from it whenever new data is comming
+      unsubscribe();
+      if (userRef) {
+        userRef.off();
+      }
+    };
   }, []);
 
   const value = {
@@ -114,6 +142,7 @@ export const AuthProvider = ({ children }) => {
     login,
     success,
     Loading,
+    authprofile,
   };
   return (
     <AuthContext.Provider value={value}>

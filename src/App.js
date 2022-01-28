@@ -11,43 +11,46 @@ import { Container } from "react-bootstrap";
 import Signup from "./pages/Signup";
 import { AuthProvider } from "./Context/AuthContext";
 import Wait from "./pages/Wait";
+import { ProfileProvider } from "./Context/ProfileContext";
 
 function App() {
   return (
     <>
       <AuthProvider>
-        <Switch>
-          <PublicRoute path="/signin" exact>
-            <Signin />
-          </PublicRoute>
-          <PublicRoute path="/wait" exact>
-            <Wait />
-          </PublicRoute>
-          <PublicRoute path="/Register" exact>
-            <Container
-              className="d-flex align-items-center justify-content-center"
-              style={{ minHeight: "100vh" }}
-            >
-              <div className="w-100 " style={{ maxWidth: "400px" }}>
-                <Signup />
-              </div>
-            </Container>
-          </PublicRoute>
-          <PublicRoute path="/login" exact>
-            <Container
-              className="d-flex align-items-center justify-content-center"
-              style={{ minHeight: "100vh" }}
-            >
-              <div className="w-100 " style={{ maxWidth: "400px" }}>
-                <Login />
-              </div>
-            </Container>
-          </PublicRoute>
+        <ProfileProvider>
+          <Switch>
+            <PublicRoute path="/wait" exact>
+              <Wait />
+            </PublicRoute>
+            <PublicRoute path="/Register" exact>
+              <Container
+                className="d-flex align-items-center justify-content-center"
+                style={{ minHeight: "100vh" }}
+              >
+                <div className="w-100 " style={{ maxWidth: "400px" }}>
+                  <Signup />
+                </div>
+              </Container>
+            </PublicRoute>
+            <PublicRoute path="/login" exact>
+              <Container
+                className="d-flex align-items-center justify-content-center"
+                style={{ minHeight: "100vh" }}
+              >
+                <div className="w-100 " style={{ maxWidth: "400px" }}>
+                  <Login />
+                </div>
+              </Container>
+            </PublicRoute>
+            <PublicRoute path="/signin" exact>
+              <Signin />
+            </PublicRoute>
 
-          <PrivateRoute path="/">
-            <Home />
-          </PrivateRoute>
-        </Switch>
+            <PrivateRoute path="/" exact>
+              <Home />
+            </PrivateRoute>
+          </Switch>
+        </ProfileProvider>
       </AuthProvider>
     </>
   );
