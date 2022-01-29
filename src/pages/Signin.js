@@ -2,9 +2,9 @@ import React from "react";
 import firebase from "firebase/compat/app";
 import { auth, database } from "../misc/firebase";
 import { Container, Row, Col, Grid, Panel, Button } from "rsuite";
-import { ReactComponent as Valid } from "../component/valid.svg";
-import { ReactComponent as Facebook } from "../component/Facebookicon.svg";
-import { ReactComponent as Google } from "../component/Googleicon.svg";
+import { ReactComponent as Valid } from "../component/Icons/valid.svg";
+import { ReactComponent as Facebook } from "../component/Icons/Facebookicon.svg";
+import { ReactComponent as Google } from "../component/Icons/Googleicon.svg";
 import { Message, toaster } from "rsuite";
 
 import { Link } from "react-router-dom";

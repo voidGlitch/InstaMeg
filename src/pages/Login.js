@@ -46,7 +46,7 @@ const Login = () => {
 
   return (
     <>
-      <Card>
+      <Card className="back">
         <Card.Body>
           {error && (
             <Alert variant="danger">
@@ -57,16 +57,25 @@ const Login = () => {
               {error}
             </Alert>
           )}
-          <h2 className="text-center mb-4">Login</h2>
+          <h2 className="text-center">Welcome back!</h2>
+          <p className="text-center text-gentle">
+            We're so excited to see you again!
+          </p>
 
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>E-mail</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Control
+                style={{ backgroundColor: "#303339", color: "white" }}
+                type="email"
+                ref={emailRef}
+                required
+              />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label className="mt-2">Password</Form.Label>
               <Form.Control
+                style={{ backgroundColor: "#303339", color: "white" }}
                 type="password"
                 ref={passwordRef}
                 autoComplete="on"
@@ -78,13 +87,14 @@ const Login = () => {
               Login
             </Button>
           </Form>
+          <div className="w-100 text-center ">
+            Create a new Account?<br></br>
+            <Link to="/Register" style={{ color: "#1ef7d8" }}>
+              Register Here!
+            </Link>
+          </div>
         </Card.Body>
       </Card>
-
-      <div className="w-100 text-center mt-2">
-        Create a new Account?<br></br>
-        Register<Link to="/Register">Here!</Link>
-      </div>
     </>
   );
 };

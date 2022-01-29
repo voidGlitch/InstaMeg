@@ -12,6 +12,8 @@ const Signup = () => {
   const { signup, Loading } = useAuth();
   const [error, seterror] = useState("");
 
+  document.body.style.backgroundImage =
+    'url("https://cdn.wallpapersafari.com/80/75/v7ryDG.jpg")';
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -45,9 +47,9 @@ const Signup = () => {
 
   return (
     <>
-      <Card>
+      <Card className="back">
         <Card.Body>
-          <h2 className="text-center mb-4">Signup</h2>
+          <h3 className="text-center ">Create an account</h3>
           {/* if we refresh the page it will send the error so to prevent that we pass currentuser presense 
           {JSON.stringify(currentUser.email)} */}
           {error && (
@@ -64,6 +66,7 @@ const Signup = () => {
             <Form.Group id="email">
               <Form.Label>E-mail</Form.Label>
               <Form.Control
+                style={{ backgroundColor: "#303339", color: "white" }}
                 type="email"
                 ref={emailRef}
                 required
@@ -73,6 +76,7 @@ const Signup = () => {
             <Form.Group id="email">
               <Form.Label>Username</Form.Label>
               <Form.Control
+                style={{ backgroundColor: "#303339", color: "white" }}
                 type="text"
                 ref={usernameRef}
                 required
@@ -82,6 +86,7 @@ const Signup = () => {
             <Form.Group id="password">
               <Form.Label className="mt-2">Password</Form.Label>
               <Form.Control
+                style={{ backgroundColor: "#303339", color: "white" }}
                 type="password"
                 ref={passwordRef}
                 autoComplete="on"
@@ -92,6 +97,7 @@ const Signup = () => {
             <Form.Group id="password-confirm" required>
               <Form.Label className="mt-2">Password Confirmation</Form.Label>
               <Form.Control
+                style={{ backgroundColor: "#303339", color: "white" }}
                 type="password"
                 ref={passwordConfirmRef}
                 autoComplete="on"
@@ -103,12 +109,13 @@ const Signup = () => {
               Sign up
             </Button>
           </Form>
+          <div className="w-100 text-center ">
+            <Link to="/login" style={{ color: "#1ef7d8" }}>
+              Already have an Account?
+            </Link>
+          </div>
         </Card.Body>
       </Card>
-
-      <div className="w-100 text-center mt-2">
-        Already have an Account? <Link to="/login">Login</Link>
-      </div>
     </>
   );
 };

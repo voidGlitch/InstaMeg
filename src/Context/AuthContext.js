@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }) => {
       });
       await sendEmailVerification(auth.currentUser, {
         url: "http://localhost:3000/",
-        handleCodeInApp: true,
       });
 
       toaster.push(
