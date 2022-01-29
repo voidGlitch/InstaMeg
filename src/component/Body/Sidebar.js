@@ -7,7 +7,7 @@ const Sidebar = () => {
       <div>
         <DashboardToggle />
       </div>
-      Bottom
+      This is Bottom
     </div>
   );
 };
