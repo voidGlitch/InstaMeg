@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { Link } from "react-router-dom";
 import { Card, Form, Button, Alert } from "react-bootstrap";
@@ -9,11 +9,14 @@ const Signup = () => {
   const usernameRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signup, Loading } = useAuth();
+  const { signup, Loading, isverified } = useAuth();
   const [error, seterror] = useState("");
-
-  document.body.style.backgroundImage =
-    'url("https://cdn.wallpapersafari.com/80/75/v7ryDG.jpg")';
+  useEffect(() => {
+    if (!isverified) {
+      document.body.style.backgroundImage =
+        'url("https://cdn.wallpapersafari.com/80/75/v7ryDG.jpg")';
+    }
+  }, [isverified]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -46,7 +49,7 @@ const Signup = () => {
   };
 
   return (
-    <>
+    <div>
       <Card className="back">
         <Card.Body>
           <h3 className="text-center ">Create an account</h3>
@@ -116,7 +119,7 @@ const Signup = () => {
           </div>
         </Card.Body>
       </Card>
-    </>
+    </div>
   );
 };
 

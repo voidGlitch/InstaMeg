@@ -7,11 +7,12 @@ import { ReactComponent as Facebook } from "../component/Icons/Facebookicon.svg"
 import { ReactComponent as Google } from "../component/Icons/Googleicon.svg";
 import { Message, toaster } from "rsuite";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 
 const Signin = () => {
   const { currentUser } = useAuth();
+  const history = useHistory();
   const signInWithProvider = async (provider) => {
     //Provider is used to Authenticate users by integrating with federated identity providers like google,facebook and method used popup takes a provider object
     try {
@@ -22,6 +23,7 @@ const Signin = () => {
           createdAt: firebase.database.ServerValue.TIMESTAMP,
         });
       }
+      history.push("/");
       toaster.push(
         <Message showIcon type="success">
           Signed in!

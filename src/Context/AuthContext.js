@@ -68,6 +68,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       //function to create user with email and password
+      setsuccess(true);
       const result = await auth.signInWithEmailAndPassword(email, password);
       console.log(result);
       toaster.push(
@@ -76,7 +77,7 @@ export const AuthProvider = ({ children }) => {
         </Message>,
         { placement: "topCenter" }
       );
-      setsuccess(true);
+      history.push("/");
     } catch (error) {
       toaster.push(
         <Message full showIcon type="error">
@@ -119,7 +120,11 @@ export const AuthProvider = ({ children }) => {
           setLoading(false);
         });
       } else {
+        if (userRef) {
+          userRef.off();
+        }
         setauthProfile(null);
+        setverified(false);
         setLoading(false);
       }
     });
@@ -134,6 +139,7 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  console.log(currentUser);
   const value = {
     currentUser,
     isverified,

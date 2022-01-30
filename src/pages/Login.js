@@ -2,29 +2,16 @@ import React, { useState, useRef } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { Link } from "react-router-dom";
 import { Card, Form, Button, Alert } from "react-bootstrap";
-import { Message, toaster } from "rsuite";
 
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, isverified, success } = useAuth();
+  const { login, success } = useAuth();
   const [error, seterror] = useState("");
   const [loading, setloading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isverified) {
-      toaster.push(
-        <Message showIcon type="error">
-          Failed to Login!
-        </Message>,
-        { placement: "topCenter" }
-      );
-
-      return seterror(
-        "Please Sign in again and verify with your email!.It is Seems you are not valid user"
-      );
-    }
     try {
       seterror("");
       setloading(true);
@@ -35,9 +22,6 @@ const Login = () => {
           seterror("Invalid! Try Again");
         }
       }, 5000);
-      emailRef.current.value = "";
-
-      passwordRef.current.value = "";
     } catch (err) {
       seterror(err.message);
     }
