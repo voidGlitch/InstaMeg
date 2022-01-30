@@ -6,26 +6,18 @@ import { Card, Form, Button, Alert } from "react-bootstrap";
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, success } = useAuth();
+  const { login } = useAuth();
   const [error, seterror] = useState("");
-  const [loading, setloading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       seterror("");
-      setloading(true);
+
       await login(emailRef.current.value, passwordRef.current.value);
-      console.log(success);
-      setTimeout(() => {
-        if (!success) {
-          seterror("Invalid! Try Again");
-        }
-      }, 5000);
     } catch (err) {
       seterror(err.message);
     }
-    setloading(false);
   };
 
   return (
@@ -67,7 +59,7 @@ const Login = () => {
               />
             </Form.Group>
 
-            <Button disabled={loading} className="w-100 mt-3" type="submit">
+            <Button className="w-100 mt-3" type="submit">
               Login
             </Button>
           </Form>

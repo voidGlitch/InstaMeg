@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [authprofile, setauthProfile] = useState(false);
   const [Loading, setLoading] = useState(true);
   const [isverified, setverified] = useState(false);
-  const [success, setsuccess] = useState(false);
+
   const history = useHistory();
 
   const signup = async (email, password, username) => {
@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       //function to create user with email and password
-      setsuccess(true);
+      setLoading(true);
       const result = await auth.signInWithEmailAndPassword(email, password);
       console.log(result);
       toaster.push(
@@ -86,8 +86,8 @@ export const AuthProvider = ({ children }) => {
         { placement: "topCenter" }
       );
       console.log(error.message);
-      setsuccess(false);
     }
+    setLoading(false);
   };
   //runs only when we have a mount on our components
   useEffect(() => {
@@ -145,7 +145,7 @@ export const AuthProvider = ({ children }) => {
     isverified,
     signup,
     login,
-    success,
+
     Loading,
     authprofile,
   };
