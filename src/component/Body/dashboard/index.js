@@ -1,11 +1,31 @@
 import React from "react";
-import { Drawer, Button } from "rsuite";
+import { Drawer, Button, toaster, Message } from "rsuite";
 import { useAuth } from "../../../Context/AuthContext";
+import { database } from "../../../misc/firebase";
 import Editableinput from "./Editableinput";
 const Dashboard = ({ SignOut }) => {
   const { authprofile } = useAuth();
-  const onSave = (newData) => {
-    console.log(newData);
+
+  const onSave = async (newData) => {
+    const userNickname = database
+      .ref(`/profiles/${authprofile.uid}`)
+      .child("/name");
+    try {
+      userNickname.set(newData);
+      toaster.push(
+        <Message showIcon type="info">
+          Successfully updated nickname
+        </Message>,
+        { placement: "topCenter" }
+      );
+    } catch (err) {
+      toaster.push(
+        <Message showIcon type="info">
+          {err.message}
+        </Message>,
+        { placement: "topCenter" }
+      );
+    }
   };
   return (
     <>

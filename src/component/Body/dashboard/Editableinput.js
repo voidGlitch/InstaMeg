@@ -32,6 +32,7 @@ const Editableinput = ({
     if (trimmed !== initialValue) {
       await onSave(trimmed);
     }
+    seteditable((p) => !p);
   };
   // const
   return (
@@ -42,6 +43,7 @@ const Editableinput = ({
           {...inputprops}
           value={input}
           placeholder={placeholder}
+          disabled={!isEditable}
           onChange={onInputChange}
         />
         <InputGroup.Button onClick={onEditclick}>
