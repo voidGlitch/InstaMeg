@@ -49,16 +49,17 @@ const Editableinput = ({
         <InputGroup.Button onClick={onEditclick}>
           {isEditable ? (
             <img
-              src="https://img.icons8.com/ios-glyphs/20/000000/close-window.png"
+              src="https://img.icons8.com/plumpy/15/000000/macos-close.png"
               alt="not"
             />
           ) : (
             <img
-              src="https://img.icons8.com/fluency/20/000000/cat-profile.png"
+              src="https://img.icons8.com/fluency/15/000000/cat-profile.png"
               alt="not"
             />
           )}
         </InputGroup.Button>
+
         {isEditable && (
           <InputGroup.Button onClick={onSaveClicked}>
             <img
