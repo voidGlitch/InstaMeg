@@ -3,8 +3,9 @@ import { Drawer, Button, toaster, Message } from "rsuite";
 import { useAuth } from "../../../Context/AuthContext";
 import { database } from "../../../misc/firebase";
 import Editableinput from "./Editableinput";
+import ProviderBlock from "./ProviderBlock";
 const Dashboard = ({ SignOut }) => {
-  const { authprofile } = useAuth();
+  const { authprofile, currentUser } = useAuth();
 
   const onSave = async (newData) => {
     const userNickname = database
@@ -35,6 +36,7 @@ const Dashboard = ({ SignOut }) => {
 
       <Drawer.Body style={{ padding: "0px 0px", margin: "0px 20px" }}>
         <h2>Good to see you @{authprofile.name}</h2>
+        {currentUser && <ProviderBlock />}
         <Editableinput
           name="nickname"
           initialValue={authprofile.name}

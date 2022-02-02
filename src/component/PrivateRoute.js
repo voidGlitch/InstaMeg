@@ -4,7 +4,7 @@ import { Redirect, Route } from "react-router";
 import { useAuth } from "../Context/AuthContext";
 //children will give all the components which is present inside privateroute and routeprops gives the route properties used in privateroute like to exact
 const PrivateRoute = ({ children, ...routeProps }) => {
-  const { authprofile, Loading, isverified } = useAuth();
+  const { authprofile, Loading } = useAuth();
 
   if (!authprofile && Loading) {
     //redirect will send us the page which is given in to=""
@@ -22,7 +22,7 @@ const PrivateRoute = ({ children, ...routeProps }) => {
     );
   }
 
-  if (!authprofile && !Loading && !isverified) {
+  if (!authprofile && !Loading) {
     //redirect will send us the page which is given in to=""
 
     return <Redirect to="/signin" />;

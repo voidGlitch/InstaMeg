@@ -17,9 +17,6 @@ function App() {
     <>
       <AuthProvider>
         <Switch>
-          <PublicRoute path="/wait" exact>
-            <Wait />
-          </PublicRoute>
           <PublicRoute path="/Register" exact>
             <Container
               className="d-flex align-items-center justify-content-center"
@@ -46,6 +43,9 @@ function App() {
 
           <PrivateRoute path="/" exact>
             <Home />
+          </PrivateRoute>
+          <PrivateRoute path="/wait" exact>
+            <Wait />
           </PrivateRoute>
         </Switch>
       </AuthProvider>

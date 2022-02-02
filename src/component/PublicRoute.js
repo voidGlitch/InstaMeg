@@ -5,7 +5,7 @@ import { useAuth } from "../Context/AuthContext";
 
 //children will give all the components which is present inside privateroute and routeprops gives the route properties used in privateroute like to exact
 const PublicRoute = ({ children, ...routeProps }) => {
-  const { authprofile, Loading, isverified } = useAuth();
+  const { authprofile, Loading, currentUser } = useAuth();
 
   if (!authprofile && Loading) {
     //redirect will send us the page which is given in to=""
@@ -24,10 +24,16 @@ const PublicRoute = ({ children, ...routeProps }) => {
   }
 
   //if profile is false we will be on the signin page for eternity i mean if we are not logged in or signin
-  if (authprofile && !Loading && isverified) {
+  if (authprofile && !Loading) {
     //redirect will send us the page which is given in to=""
 
-    return <Redirect to="/" />;
+    if (
+      currentUser.providerData.some((data) => data.providerId === "password")
+    ) {
+      return <Redirect to="/wait" />;
+    } else {
+      return <Redirect to="/" />;
+    }
   }
 
   //returns the route just we use to did in app.js

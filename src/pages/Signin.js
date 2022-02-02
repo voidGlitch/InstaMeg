@@ -8,10 +8,8 @@ import { ReactComponent as Google } from "../component/Icons/Googleicon.svg";
 import { Message, toaster } from "rsuite";
 
 import { Link, useHistory } from "react-router-dom";
-import { useAuth } from "../Context/AuthContext";
 
 const Signin = () => {
-  const { currentUser } = useAuth();
   const history = useHistory();
   const signInWithProvider = async (provider) => {
     //Provider is used to Authenticate users by integrating with federated identity providers like google,facebook and method used popup takes a provider object
@@ -40,10 +38,6 @@ const Signin = () => {
     }
   };
 
-  // const signInWithMail = async (email, password) => {
-  //   const result1 = await auth.signInWithEmailAndPassword(email, password);
-  //   console.log(result1);
-  // };
   const facebookSignin = () => {
     //Represents the Facebook Login authentication provider. Use this class to obtain FacebookAuthCredential s.
     signInWithProvider(new firebase.auth.FacebookAuthProvider());
@@ -78,7 +72,7 @@ const Signin = () => {
                     onClick={facebookSignin}
                   >
                     <Facebook />
-                    {currentUser
+                    {auth.currentUser
                       ? "Continue with facebook"
                       : "Login with facebook"}
                   </Button>
@@ -89,7 +83,9 @@ const Signin = () => {
                     onClick={googleSignin}
                   >
                     <Google />{" "}
-                    {currentUser ? "Continue with google" : "Login with google"}
+                    {auth.currentUser
+                      ? "Continue with google"
+                      : "Login with google"}
                   </Button>
 
                   <Link to="/Register" style={{ textDecoration: "none" }}>

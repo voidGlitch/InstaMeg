@@ -45,8 +45,6 @@ export const AuthProvider = ({ children }) => {
         </Message>,
         { placement: "topCenter" }
       );
-
-      history.push("/wait");
     } catch (error) {
       toaster.push(
         <Notification showicon="true" type="error" header="Error" closable>
