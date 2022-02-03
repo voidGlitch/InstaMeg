@@ -4,6 +4,7 @@ import { useAuth } from "../../../Context/AuthContext";
 import { database } from "../../../misc/firebase";
 import Editableinput from "./Editableinput";
 import ProviderBlock from "./ProviderBlock";
+import AvatarUploadbtn from "./AvatarUploadbtn";
 const Dashboard = ({ SignOut }) => {
   const { authprofile, currentUser } = useAuth();
 
@@ -43,6 +44,7 @@ const Dashboard = ({ SignOut }) => {
           onSave={onSave}
           label={<strong className="mb-2">Nickname</strong>}
         />
+        <AvatarUploadbtn />
       </Drawer.Body>
 
       <div className="footer">
