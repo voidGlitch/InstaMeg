@@ -1,26 +1,43 @@
 import React from "react";
 import firebase from "firebase/compat/app";
-import { auth } from "../misc/firebase";
+import { auth, database } from "../misc/firebase";
 import { Container, Row, Col, Grid, Panel, Button } from "rsuite";
-import { ReactComponent as Valid } from "../component/valid.svg";
-import { ReactComponent as Facebook } from "../component/Facebookicon.svg";
-import { ReactComponent as Google } from "../component/Googleicon.svg";
-import { Link } from "react-router-dom";
-import { useAuth } from "../Context/AuthContext";
+import { ReactComponent as Valid } from "../component/Icons/valid.svg";
+import { ReactComponent as Facebook } from "../component/Icons/Facebookicon.svg";
+import { ReactComponent as Google } from "../component/Icons/Googleicon.svg";
+import { Message, toaster } from "rsuite";
+
+import { Link, useHistory } from "react-router-dom";
 
 const Signin = () => {
-  const { currentUser } = useAuth();
+  const history = useHistory();
   const signInWithProvider = async (provider) => {
     //Provider is used to Authenticate users by integrating with federated identity providers like google,facebook and method used popup takes a provider object
-    const result = await auth.signInWithPopup(provider);
-
-    console.log(result);
+    try {
+      const { additionalUserInfo, user } = await auth.signInWithPopup(provider);
+      if (additionalUserInfo.isNewUser) {
+        await database.ref(`/profiles/${user.uid}`).set({
+          name: user.displayName,
+          createdAt: firebase.database.ServerValue.TIMESTAMP,
+        });
+      }
+      history.push("/");
+      toaster.push(
+        <Message showIcon type="success">
+          Signed in!
+        </Message>,
+        { placement: "topCenter" }
+      );
+    } catch (error) {
+      toaster.push(
+        <Message showIcon type="error">
+          {error.message}
+        </Message>,
+        { placement: "topCenter" }
+      );
+    }
   };
 
-  // const signInWithMail = async (email, password) => {
-  //   const result1 = await auth.signInWithEmailAndPassword(email, password);
-  //   console.log(result1);
-  // };
   const facebookSignin = () => {
     //Represents the Facebook Login authentication provider. Use this class to obtain FacebookAuthCredential s.
     signInWithProvider(new firebase.auth.FacebookAuthProvider());
@@ -55,7 +72,7 @@ const Signin = () => {
                     onClick={facebookSignin}
                   >
                     <Facebook />
-                    {currentUser
+                    {auth.currentUser
                       ? "Continue with facebook"
                       : "Login with facebook"}
                   </Button>
@@ -66,9 +83,9 @@ const Signin = () => {
                     onClick={googleSignin}
                   >
                     <Google />{" "}
-                    {currentUser
-                      ? "Continue with facebook"
-                      : "Login with facebook"}
+                    {auth.currentUser
+                      ? "Continue with google"
+                      : "Login with google"}
                   </Button>
 
                   <Link to="/Register" style={{ textDecoration: "none" }}>

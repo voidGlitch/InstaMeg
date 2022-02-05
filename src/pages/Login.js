@@ -8,43 +8,50 @@ const Login = () => {
   const passwordRef = useRef();
   const { login } = useAuth();
   const [error, seterror] = useState("");
-  const [loading, setloading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       seterror("");
-      setloading(true);
+
       await login(emailRef.current.value, passwordRef.current.value);
-    } catch {
-      seterror("Failed to login");
-      setTimeout(() => {
-        seterror(null);
-      }, 4000);
+    } catch (err) {
+      seterror(err.message);
     }
-    setloading(false);
   };
 
   return (
     <>
-      {error && (
-        <Alert variant="danger" as="alert" className="Fade">
-          {error}
-        </Alert>
-      )}
-      <Card>
+      <Card className="back">
         <Card.Body>
-          <h2 className="text-center mb-4">Login</h2>
+          {error && (
+            <Alert variant="danger">
+              <img
+                src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/30/000000/external-error-coronavirus-covid19-flatart-icons-flat-flatarticons.png"
+                alt="not"
+              />
+              {error}
+            </Alert>
+          )}
+          <h2 className="text-center">Welcome back!</h2>
+          <p className="text-center text-gentle">
+            We're so excited to see you again!
+          </p>
 
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>E-mail</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Control
+                style={{ backgroundColor: "#303339", color: "white" }}
+                type="email"
+                ref={emailRef}
+                required
+              />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label className="mt-2">Password</Form.Label>
               <Form.Control
+                style={{ backgroundColor: "#303339", color: "white" }}
                 type="password"
                 ref={passwordRef}
                 autoComplete="on"
@@ -52,17 +59,18 @@ const Login = () => {
               />
             </Form.Group>
 
-            <Button disabled={loading} className="w-100 mt-3" type="submit">
+            <Button className="w-100 mt-3" type="submit">
               Login
             </Button>
           </Form>
+          <div className="w-100 text-center ">
+            Create a new Account?<br></br>
+            <Link to="/Register" style={{ color: "#1ef7d8" }}>
+              Register Here!
+            </Link>
+          </div>
         </Card.Body>
       </Card>
-
-      <div className="w-100 text-center mt-2">
-        Create a new Account?<br></br>
-        Register<Link to="/signin">Here!</Link>
-      </div>
     </>
   );
 };

@@ -329,25 +329,29 @@ $indent_50: 50px;
     #bc1888 100%
   );
 }
-.nav {
-  overflow: hidden;
-  top: 0;
+.spinner {
+  animation: spin infinite 3s linear;
+
+  /*You can increase or decrease the timer (5s) to 
+   increase or decrease the speed of the spinner*/
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.back {
+  background-color: #36393f;
+  color: #e3ecfa;
+  border-radius: 15px;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
   width: 100%;
-  z-index: 10;
-  box-shadow: 0 8px 25px -10px #000;
-}
-.ptag {
-  font-family: -webkit-pictograph;
-  font-size: 15px;
-}
-.Fade {
-  animation: fadeOut ease 7s;
-}
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.5;
-  }
+  margin: 0px 0px 10px;
 }

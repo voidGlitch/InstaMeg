@@ -1,3 +1,4 @@
+import React from "react";
 import { Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import "./styles/main.scss";
@@ -9,15 +10,13 @@ import PublicRoute from "./component/PublicRoute";
 import { Container } from "react-bootstrap";
 import Signup from "./pages/Signup";
 import { AuthProvider } from "./Context/AuthContext";
+import Wait from "./pages/Wait";
 
 function App() {
   return (
     <>
       <AuthProvider>
         <Switch>
-          <PublicRoute path="/signin" exact>
-            <Signin />
-          </PublicRoute>
           <PublicRoute path="/Register" exact>
             <Container
               className="d-flex align-items-center justify-content-center"
@@ -38,9 +37,15 @@ function App() {
               </div>
             </Container>
           </PublicRoute>
+          <PublicRoute path="/signin" exact>
+            <Signin />
+          </PublicRoute>
 
-          <PrivateRoute path="/">
+          <PrivateRoute path="/" exact>
             <Home />
+          </PrivateRoute>
+          <PrivateRoute path="/wait" exact>
+            <Wait />
           </PrivateRoute>
         </Switch>
       </AuthProvider>
