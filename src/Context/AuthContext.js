@@ -139,6 +139,7 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  console.log(currentUser);
   const value = {
     currentUser,
     isverified,
