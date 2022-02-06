@@ -3,11 +3,6 @@ import { Modal, Button, toaster, Message } from "rsuite";
 import { useModalState } from "../../../misc/Custom-hooks";
 import AvatarEditor from "react-avatar-editor";
 import { storage, database } from "../../../misc/firebase";
-import {
-  getDownloadURL,
-  ref as storageRef,
-  uploadBytes,
-} from "firebase/storage";
 
 import { useAuth } from "../../../Context/AuthContext";
 import ProfileAvatar from "./ProfileAvatar";
@@ -20,7 +15,7 @@ const getBlob = (canvas) => {
   return new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
       if (blob) {
-        resolve(canvas);
+        resolve(blob);
       } else {
         reject(new Error("File Process Error"));
       }
@@ -63,29 +58,28 @@ const AvatarUploadbtn = () => {
     try {
       const blob = await getBlob(canvas);
 
-      const avatarFileRef = storageRef(
-        storage,
-        `/profiles/${authprofile.uid}/avatar`
-      );
+      const avatarFileRef = storage
+        .ref(`/profiles/${authprofile.uid}`)
+        .child("avatar");
 
-      await uploadBytes(avatarFileRef, blob, {
-        cacheControl: `public, max-age=${3600 * 24 * 3}`,
+      const uploadAvatarResult = await avatarFileRef.put(blob, {
+        cacheControl: `public,max-age=${3600 * 24 * 3}`,
       });
 
-      const downloadUrl = await getDownloadURL(avatarFileRef);
+      const downloadUrl = await uploadAvatarResult.ref.getDownloadURL();
 
       const userAvatarRef = database
         .ref(`/profiles/${authprofile.uid}`)
         .child("avatar");
-      userAvatarRef.set(downloadUrl);
+      await userAvatarRef.set(downloadUrl);
       setisLoading(false);
+      close();
       toaster.push(
         <Message showIcon type="success">
           File has been uploaded
         </Message>,
         { placement: "topCenter" }
       );
-      close();
     } catch (err) {
       setisLoading(false);
       toaster.push(
@@ -100,12 +94,10 @@ const AvatarUploadbtn = () => {
   return (
     <div className="mt-3 text-center">
       <ProfileAvatar
+        style={{ height: "200px", width: "200px", borderRadius: "100px" }}
         src={authprofile.avatar}
         name={authprofile.name}
-        avatar={authprofile.avatar}
-        circle
-        size="lg"
-        className="width-200 height-200 img-fullsize font-huge"
+        // className="width-200 height-200 img-fullsize font-huge"
       />
       <div>
         <label className="d-block padded cursor-pointer" htmlFor="avatar-btn">
