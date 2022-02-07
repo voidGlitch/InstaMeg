@@ -32,7 +32,14 @@ const Dashboard = ({ SignOut }) => {
   };
   return (
     <>
-      <Drawer.Header>
+      <Drawer.Header
+        style={{
+          // backgroundColor: "red",
+          paddingBlockEnd: "inherit",
+          paddingBottom: "5px",
+          textAlign: "center",
+        }}
+      >
         <Drawer.Title>DashBoard</Drawer.Title>
       </Drawer.Header>
 
