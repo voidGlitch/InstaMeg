@@ -22,11 +22,22 @@ const PrivateRoute = ({ children, ...routeProps }) => {
     );
   }
 
-  if (!authprofile && !Loading) {
+  if (!authprofile && Loading) {
     //redirect will send us the page which is given in to=""
-
-    return <Redirect to="/signin" />;
-  } else if (!authprofile && !Loading) {
+    return (
+      <div
+        className="d-flex align-items-center justify-content-center"
+        style={{ minHeight: "100vh", backgroundColor: "#0f2b1d" }}
+      >
+        <img
+          src="https://img.icons8.com/fluency/144/000000/reactos.png"
+          alt="no"
+          className="spinner"
+        />
+      </div>
+    );
+  }
+  if (!authprofile && !Loading) {
     //redirect will send us the page which is given in to=""
 
     return <Redirect to="/signin" />;

@@ -5,7 +5,7 @@ import AvatarEditor from "react-avatar-editor";
 import { storage, database } from "../../../misc/firebase";
 
 import { useAuth } from "../../../Context/AuthContext";
-import ProfileAvatar from "./ProfileAvatar";
+import ProfileAvatar from "../dashboard/ProfileAvatar";
 
 const fileInputfiles = ".png,.jpeg,.jpg";
 const acceptedfiles = ["image/png", "image/jpeg", "image/pjpeg"];
@@ -92,16 +92,16 @@ const AvatarUploadbtn = () => {
   };
 
   return (
-    <div className="mt-3 text-center">
-      <ProfileAvatar
-        style={{ height: "200px", width: "200px", borderRadius: "100px" }}
+    <div className=" text-center">
+      {/* <ProfileAvatar
+        style={{ height: "50px", width: "50px", borderRadius: "100px" }}
         src={authprofile.avatar}
         name={authprofile.name}
         // className="width-200 height-200 img-fullsize font-huge"
-      />
+      /> */}
       <div>
         <label className="d-block padded cursor-pointer" htmlFor="avatar-btn">
-          Select an Avatar
+          Choose an Avatar
           <input
             id="avatar-btn"
             type="file"

@@ -7,7 +7,7 @@ import { useAuth } from "../Context/AuthContext";
 const PublicRoute = ({ children, ...routeProps }) => {
   const { authprofile, Loading, currentUser } = useAuth();
 
-  if (!authprofile && Loading) {
+  if (authprofile && Loading) {
     //redirect will send us the page which is given in to=""
     return (
       <div

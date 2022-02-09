@@ -25,7 +25,6 @@ const DashboardToggle = () => {
           alt="not"
           className="mx-2"
         />
-        Dashboard
       </Button>
       <Drawer full={isMobile} open={isOpen} onClose={close} placement="left">
         <Dashboard SignOut={SignOut} />
